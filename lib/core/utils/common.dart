@@ -89,3 +89,38 @@ void showError(String message) {
     borderRadius: 8,
   );
 }
+
+
+Widget buildHeadingWithButton({
+  required String title,
+  required String rightText,
+  required var onTap,
+  bool showRight = true
+}) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      AppText(
+        text: title,
+        fontSize: 16.sp,
+        fontWeight: FontWeight.bold,
+      ),
+      if(showRight)
+      Container(
+        padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 8),
+        decoration: BoxDecoration(
+          color: AppColors.lightLowPrimary,
+          borderRadius: BorderRadius.circular(8.r),
+        ),
+        child: GestureDetector(
+          onTap: onTap,
+          child:  AppText(
+            text: rightText,
+            fontSize: 12.sp,
+            color: AppColors.lightTextLowColor,
+          ),
+        ),
+      ),
+    ],
+  );
+}

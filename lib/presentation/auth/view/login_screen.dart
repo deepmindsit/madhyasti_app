@@ -8,7 +8,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final controller = getIt<AuthController>();
+  final controller = getIt<LoginController>();
 
   @override
   Widget build(BuildContext context) {
@@ -120,11 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildContinueButton() {
     return AppButton(
       text: 'Continue',
-      onTap: () {
-        if (controller.loginKey.currentState!.validate()) {
-          Get.toNamed(Routes.verifyOTP);
-        }
-      },
+      onTap: controller.continueLogin,
       backgroundColor: AppColors.lightPrimary,
     );
   }

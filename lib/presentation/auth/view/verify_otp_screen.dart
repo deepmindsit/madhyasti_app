@@ -8,12 +8,12 @@ class VerifyOTPScreen extends StatefulWidget {
 }
 
 class _VerifyOTPScreenState extends State<VerifyOTPScreen> with CodeAutoFill {
-  final controller = getIt<AuthController>();
+  final controller = getIt<OtpController>();
 
   @override
   void initState() {
     super.initState();
-    controller.startOTPTimer();
+    controller.startTimer();
     listenForCode();
     SmsAutoFill().getAppSignature.then((value) {});
   }
@@ -64,11 +64,11 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> with CodeAutoFill {
               // Title
               buildTitle("Enter the code send to"),
               buildSubTitle(
-                "We’ve sent a 6-digit OTP on +91 ${controller.numberController.text.trim()}",
+                "We’ve sent a 6-digit OTP on +91 ${getIt<LoginController>().numberController.text.trim()}",
                 theme,
               ),
               const SizedBox(height: 10),
-              _buildOTPField('OTP',theme),
+              _buildOTPField('OTP', theme),
               _buildResendOtp(),
               const SizedBox(height: 22),
               _buildVerifyButton(),
@@ -81,7 +81,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> with CodeAutoFill {
   }
 
   /// ---------------- OTP FIELD ----------------
-  Widget _buildOTPField(String label,ThemeData theme) {
+  Widget _buildOTPField(String label, ThemeData theme) {
     final defaultPinTheme = PinTheme(
       width: 50.w,
       height: 50.h,
@@ -100,7 +100,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> with CodeAutoFill {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppLabel(text: label, color:theme.colorScheme.onSurface),
+        AppLabel(text: label, color: theme.colorScheme.onSurface),
         SizedBox(height: 8.h),
         Center(
           child: Pinput(
@@ -168,7 +168,9 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> with CodeAutoFill {
   /// ---------------- Change Number ----------------
   Widget _buildChangeNumber() {
     return GestureDetector(
-      onTap: () => AllDialogs().changeNumber(controller.numberController.text),
+      onTap: () => AllDialogs().changeNumber(
+        getIt<LoginController>().numberController.text,
+      ),
       child: Text(
         "Change Mobile Number",
         textAlign: TextAlign.center,

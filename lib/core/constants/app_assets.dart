@@ -23,5 +23,5 @@ class AppAssets {
 
   // ============== Icons ===========
   static const String flag = '$_iconsPath/ic_flag.png';
-
+  static const String navIcon = '$_iconsPath/ic_nav.png';
 }

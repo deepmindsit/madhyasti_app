@@ -8,5 +8,6 @@ class AppPages {
     GetPage(name: Routes.verifyOTP, page: () => VerifyOTPScreen()),
     GetPage(name: Routes.registerScreen, page: () => RegisterScreen()),
     GetPage(name: Routes.addProfile, page: () => ProfileAdd()),
+    GetPage(name: Routes.mainScreen, page: () => NavigationScreen()),
   ];
 }

@@ -39,7 +39,8 @@ class MyApp extends StatelessWidget {
         /// Routing & bindings
         // initialBinding: InitialBindings(),
         getPages: AppPages.routes,
-        initialRoute: Routes.splash,
+        // initialRoute: Routes.splash,
+        initialRoute: Routes.mainScreen,
 
         /// Theme configuration
         theme: AppTheme.lightTheme,

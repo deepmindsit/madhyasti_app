@@ -8,7 +8,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final controller = getIt<AuthController>();
+  final controller = getIt<RegisterController>();
 
   @override
   Widget build(BuildContext context) {

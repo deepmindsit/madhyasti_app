@@ -52,6 +52,8 @@ dependencies:
   pretty_dio_logger: ^1.4.0
   google_fonts: ^8.0.2
   dropdown_search: ^6.0.2
+  carousel_slider: ^5.1.2
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:

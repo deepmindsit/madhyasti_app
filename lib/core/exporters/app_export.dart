@@ -20,6 +20,9 @@ export 'package:google_fonts/google_fonts.dart';
 export 'package:pinput/pinput.dart';
 export 'package:sms_autofill/sms_autofill.dart' hide Orientation;
 export 'package:hugeicons/hugeicons.dart';
+export 'package:cached_network_image/cached_network_image.dart';
+export 'package:carousel_slider/carousel_slider.dart';
+
 //Common//
 export 'package:madhya/core/constants/app_constants.dart';
 export 'package:madhya/core/config/routes/app_routes.dart';
@@ -39,14 +42,22 @@ export 'package:madhya/presentation/auth/view/login_screen.dart';
 export 'package:madhya/presentation/auth/view/verify_otp_screen.dart';
 export 'package:madhya/presentation/auth/view/register_screen.dart';
 export 'package:madhya/presentation/auth/view/profile_add.dart';
+export 'package:madhya/presentation/navigation/view/navigation_screen.dart';
+export 'package:madhya/presentation/home/view/home_screen.dart';
+export 'package:madhya/presentation/matches/view/match_screen.dart';
 
 //Controller//
 export 'package:madhya/presentation/splash/controller/splash_controller.dart';
-export 'package:madhya/presentation/auth/controller/auth_controller.dart';
+export 'package:madhya/presentation/auth/controller/login_controller.dart';
+export 'package:madhya/presentation/auth/controller/otp_controller.dart';
+export 'package:madhya/presentation/auth/controller/register_controller.dart';
+export 'package:madhya/presentation/auth/controller/onboarding_controller.dart';
+export 'package:madhya/presentation/navigation/controller/navigation_controller.dart';
+export 'package:madhya/presentation/home/controller/home_controller.dart';
+export 'package:madhya/presentation/matches/controller/match_controller.dart';
 
 //Component//
 export 'package:madhya/core/component/onboarding_indicator.dart';
 export '../../../core/component/app_dropdown.dart';
-
-
-
+export 'package:madhya/core/utils/match_card_compact.dart';
+export 'package:madhya/core/component/app_slider.dart';

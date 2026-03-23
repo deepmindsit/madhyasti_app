@@ -8,6 +8,9 @@ class AppColors {
   static const Color lightPrimary = Color(0xFF950053);
   static const Color lightMidPrimary = Color(0xFFC86EA0);
   static const Color lightLowPrimary = Color(0xFFFFDFF1);
+  static const Color lightPink = Color(0xFFFFEBF6);
+  static const Color lightCardPink = Color(0xFFFFEAEA);
+  static const Color lightBorderPink = Color(0xFFF69CCF);
   static const Color lightSecondary = Color(0xFFF79E3B);
   static const Color lightMidSecondary = Color(0xFFCF985B);
   static const Color lightLowSecondary = Color(0xFFFFEBD4);

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:madhya/core/exporters/app_export.dart';
 
 @lazySingleton
@@ -30,7 +28,7 @@ class AuthController extends GetxController {
     },
   ].obs;
 
-  void navigateToNextPage() {
+  void startAutoScroll() {
     if (pageController.page! < onboardingData.length - 1) {
       pageController.nextPage(
         duration: const Duration(milliseconds: 300),
@@ -59,56 +57,9 @@ class AuthController extends GetxController {
     });
   }
 
-  ////////////////////////////////Send OTP Screen Content//////////////////////////////////
-  final numberController = TextEditingController();
-  final loginKey = GlobalKey<FormState>();
-
-  ////////////////////////////////Verify OTP Screen Content//////////////////////////////////
-  final otpController = TextEditingController();
-  final verifyKey = GlobalKey<FormState>();
-
-  var start = 30.obs;
-  Timer? _timer;
-
-  void startOTPTimer() {
-    start.value = 30;
-    _timer?.cancel();
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (start.value == 0) {
-        timer.cancel();
-      } else {
-        start.value--;
-      }
-    });
+  @override
+  void onClose() {
+    timer?.cancel();
+    super.onClose();
   }
-
-  void stopTimer() {
-    _timer?.cancel();
-  }
-
-  /// Extract OTP from full SMS
-  String extractOtp(String sms) {
-    final exp = RegExp(r'\b\d{6}\b');
-    return exp.firstMatch(sms)?.group(0) ?? "";
-  }
-
-  ////////////////////////////////Register Screen Content//////////////////////////////////
-  final registerKey = GlobalKey<FormState>();
-  final nameController = TextEditingController();
-  final dobController = TextEditingController();
-  final selectedGender = Rxn<String>();
-  final selectedAge = Rxn<String>();
-  final selectedReligion = Rxn<String>();
-  final selectedCaste = Rxn<String>();
-  final selectedSubCaste = Rxn<String>();
-  final isTermsAccepted = false.obs;
-  final profileImage = Rx<File?>(null);
-
-  final ageList = ['10', '20', '30', '40'].obs;
-
-  final religionList = ['Hindu', 'Christ', 'Muslim', 'Other'].obs;
-
-  final casteList = ['Marathi', 'Other'].obs;
-
-  final subCasteList = ['Marathi', 'Other'].obs;
 }

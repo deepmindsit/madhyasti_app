@@ -43,7 +43,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       controller: controller,
                       description: data['description']!,
                       image: data['image']!,
-                      onNextPressed: controller.navigateToNextPage,
+                      onNextPressed: controller.startAutoScroll,
                       title: data['title']!,
                     );
                   },

@@ -57,7 +57,7 @@ class AllDialogs {
             ),
             CupertinoDialogAction(
               onPressed: () {
-                getIt<AuthController>().numberController.clear();
+                getIt<LoginController>().numberController.clear();
                 Get.offAllNamed(Routes.login);
               },
               child: const Text('Yes'),
@@ -79,7 +79,7 @@ class AllDialogs {
             ),
             TextButton(
               onPressed: () {
-                getIt<AuthController>().numberController.clear();
+                getIt<LoginController>().numberController.clear();
                 Get.offAllNamed(Routes.login);
               },
               child: const Text('Yes'),
@@ -89,8 +89,6 @@ class AllDialogs {
       );
     }
   }
-
-
 
   void showConfirmationDialog(
     String title,
@@ -165,7 +163,4 @@ class AllDialogs {
       ),
     );
   }
-
-
 }
-
