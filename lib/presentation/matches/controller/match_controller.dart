@@ -36,6 +36,12 @@ class MatchController extends GetxController {
     // https://s3.ap-south-1.amazonaws.com/awsimages.imagesbazaar.com/1200x1800-old/19805/SM964729.jpg?date=Mon%20Mar%2023%202026%2017:48:41%20GMT+0530%20(India%20Standard%20Time)
     // https://s3.ap-south-1.amazonaws.com/awsimages.imagesbazaar.com/1200x1800-old/19804/SM964550.jpg?date=Mon%20Mar%2023%202026%2017:49:06%20GMT+0530%20(India%20Standard%20Time)
   ].obs;
-  final selectedCat = '';
-  final category = ['All Matches', 'Top Matches', 'New Profiles'].obs;
+  final selectedCategory = '0'.obs;
+  final category = [
+    {'name': 'All Matches', 'icon': HugeIcons.strokeRoundedUserMultiple02},
+    {'name': 'Top Matches', 'icon': HugeIcons.strokeRoundedDashboardSpeed01},
+    {'name': 'New Profiles', 'icon': HugeIcons.strokeRoundedUserLove02},
+    {'name': 'Premium Profiles', 'icon': HugeIcons.strokeRoundedCrown},
+    {'name': 'Nearby Matches', 'icon': HugeIcons.strokeRoundedLocation04},
+  ].obs;
 }

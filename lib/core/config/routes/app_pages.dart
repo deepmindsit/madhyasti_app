@@ -9,5 +9,6 @@ class AppPages {
     GetPage(name: Routes.registerScreen, page: () => RegisterScreen()),
     GetPage(name: Routes.addProfile, page: () => ProfileAdd()),
     GetPage(name: Routes.mainScreen, page: () => NavigationScreen()),
+    GetPage(name: Routes.othersProfile, page: () => OtherProfile()),
   ];
 }

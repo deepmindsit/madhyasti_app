@@ -25,6 +25,8 @@ import 'package:madhya/presentation/matches/controller/match_controller.dart'
     as _i742;
 import 'package:madhya/presentation/navigation/controller/navigation_controller.dart'
     as _i272;
+import 'package:madhya/presentation/profile/controller/other_profile_controller.dart'
+    as _i363;
 import 'package:madhya/presentation/splash/controller/splash_controller.dart'
     as _i572;
 
@@ -45,6 +47,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i742.MatchController>(() => _i742.MatchController());
     gh.lazySingleton<_i272.NavigationController>(
       () => _i272.NavigationController(),
+    );
+    gh.lazySingleton<_i363.OtherProfileController>(
+      () => _i363.OtherProfileController(),
     );
     gh.lazySingleton<_i572.SplashController>(() => _i572.SplashController());
     return this;

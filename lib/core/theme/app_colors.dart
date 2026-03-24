@@ -18,6 +18,7 @@ class AppColors {
   static const Color lightTextMidColor = Color(0xFF3F3F3F);
   static const Color lightTextLowColor = Color(0xFF7E7E7E);
   static const Color bgColor = Color(0xFFF7F2F7);
+  static const Color catBgColor = Color(0xFFF6F6F6);
 
   static const Color lightError = Color(0xFFB00020);
   static const Color lightOnError = Color(0xFFFFFFFF);

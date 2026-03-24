@@ -45,6 +45,7 @@ export 'package:madhya/presentation/auth/view/profile_add.dart';
 export 'package:madhya/presentation/navigation/view/navigation_screen.dart';
 export 'package:madhya/presentation/home/view/home_screen.dart';
 export 'package:madhya/presentation/matches/view/match_screen.dart';
+export 'package:madhya/presentation/profile/widget/other_profile.dart';
 
 //Controller//
 export 'package:madhya/presentation/splash/controller/splash_controller.dart';
@@ -55,9 +56,17 @@ export 'package:madhya/presentation/auth/controller/onboarding_controller.dart';
 export 'package:madhya/presentation/navigation/controller/navigation_controller.dart';
 export 'package:madhya/presentation/home/controller/home_controller.dart';
 export 'package:madhya/presentation/matches/controller/match_controller.dart';
+export 'package:madhya/presentation/profile/controller/other_profile_controller.dart';
 
 //Component//
 export 'package:madhya/core/component/onboarding_indicator.dart';
 export '../../../core/component/app_dropdown.dart';
 export 'package:madhya/core/utils/match_card_compact.dart';
 export 'package:madhya/core/component/app_slider.dart';
+export 'package:madhya/core/utils/match_card_overlay.dart';
+export 'package:madhya/core/component/app_icon_buttons.dart';
+export 'package:madhya/core/component/app_bottomsheet_layout.dart';
+export 'package:madhya/core/component/bottom_header.dart';
+export 'package:madhya/presentation/profile/widget/contact_bottomsheet.dart';
+export 'package:madhya/presentation/profile/widget/interested_bottomsheet.dart';
+export 'package:madhya/presentation/profile/widget/shortlist_bottomsheet.dart';

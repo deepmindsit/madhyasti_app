@@ -74,14 +74,14 @@ class CompactCard extends StatelessWidget {
                 if (isVerified)
                   Padding(
                     padding: EdgeInsets.only(right: 4.h),
-                    child: _badge(
+                    child: badge(
                       "Verified",
                       AppColors.lightPrimary,
                       HugeIcons.strokeRoundedCheckmarkBadge01,
                     ),
                   ),
                 if (isPremium)
-                  _badge(
+                  badge(
                     "Premium",
                     AppColors.lightSecondary,
                     HugeIcons.strokeRoundedCrown02,
@@ -143,25 +143,5 @@ class CompactCard extends StatelessWidget {
   }
 
   /// 🔥 Badge Widget (Reusable)
-  Widget _badge(String text, Color color, dynamic icon) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20.r),
-      ),
-      child: Row(
-        spacing: 4.w,
-        children: [
-          HugeIcon(icon: icon, size: 12.r, color: color),
-          AppText(
-            text: text,
-            fontSize: 9.sp,
-            color: color,
-            fontWeight: FontWeight.w500,
-          ),
-        ],
-      ),
-    );
-  }
+
 }

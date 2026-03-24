@@ -59,100 +59,11 @@ class _AppCustomSliderState extends State<AppCustomSlider> {
             autoPlayCurve: Curves.fastOutSlowIn,
             onPageChanged: (index, _) => _currentIndex.value = index,
           ),
-          items: widget.imageUrls.map<Widget>((v) => _buildImage(v)).toList(),
+          items: widget.imageUrls
+              .map<Widget>((v) => MatchCardOverlay(details: v))
+              .toList(),
         ),
       ],
-    );
-  }
-
-  Widget _buildImage(dynamic data) {
-    return Container(
-      margin: widget.margin ?? EdgeInsets.symmetric(horizontal: 4.w),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(widget.borderRadius),
-      ),
-      child: Stack(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(widget.borderRadius),
-            child: CachedNetworkImage(
-              imageUrl: data['image'],
-              fit: BoxFit.cover,
-              width: double.infinity,
-              placeholder: (_, __) =>
-                  widget.placeholder ??
-                  const Center(child: CircularProgressIndicator()),
-              errorWidget: (_, __, ___) =>
-                  widget.errorWidget ?? const Icon(Icons.broken_image),
-            ),
-          ),
-          _buildGradientOverlay(),
-          _buildContentOverlay(data['details'] ?? {}),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildGradientOverlay() {
-    return Positioned.fill(
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(widget.borderRadius),
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.transparent,
-              Colors.transparent,
-              AppColors.lightMidPrimary,
-            ],
-            stops: const [0.0, 0.2, 1.0],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildContentOverlay(dynamic details) {
-    return Positioned(
-      left: 12.w,
-      right: 12.w,
-      bottom: 12.h,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AppText(
-            text: details['name'] ?? '',
-            fontSize: 16.sp,
-            maxLines: 2,
-            textAlign: TextAlign.start,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-
-          AppText(
-            text: details['id'] ?? '',
-            fontSize: 12.sp,
-            maxLines: 2,
-            textAlign: TextAlign.start,
-            color: Colors.white,
-          ),
-          AppText(
-            text: details['age'] ?? '',
-            fontSize: 12.sp,
-            maxLines: 2,
-            textAlign: TextAlign.start,
-            color: Colors.white,
-          ),
-          AppText(
-            text: details['address'] ?? '',
-            fontSize: 12.sp,
-            maxLines: 2,
-            textAlign: TextAlign.start,
-            color: Colors.white,
-          ),
-        ],
-      ),
     );
   }
 }
