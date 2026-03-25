@@ -9,4 +9,6 @@ class Routes {
   static const String addProfile = "/addProfile";
   static const String mainScreen = "/mainScreen";
   static const String othersProfile = "/othersProfile";
+  static const String chatDetails = "/chatDetails";
+  static const String chatProfileDetails = "/chatProfileDetails";
 }

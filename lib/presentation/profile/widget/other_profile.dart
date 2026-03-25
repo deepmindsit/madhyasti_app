@@ -205,32 +205,7 @@ class _OtherProfileState extends State<OtherProfile> {
     );
   }
 
-  /// 🔹 APPBAR
-  // Widget _buildAppbar() {
-  //   return Positioned(
-  //     left: 12.w,
-  //     right: 0.w,
-  //     top: MediaQuery.of(context).padding.top + 10,
-  //     child: Row(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //       children: [
-  //         AppIconButton(
-  //           onPressed: () => Get.back(),
-  //           icon: HugeIcons.strokeRoundedArrowLeft01,
-  //           iconColor: Colors.white,
-  //           backgroundColor: AppColors.grey50.withValues(alpha: 0.2),
-  //         ),
-  //         _buildIndicators(),
-  //         AppIconButton(
-  //           icon: HugeIcons.strokeRoundedMoreVerticalSquare01,
-  //           iconColor: Colors.white,
-  //           backgroundColor: AppColors.grey50.withValues(alpha: 0.2),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+
 
   /// 🔥 BOTTOM MENU
   Widget _buildBottomMenu() {

@@ -46,6 +46,8 @@ export 'package:madhya/presentation/navigation/view/navigation_screen.dart';
 export 'package:madhya/presentation/home/view/home_screen.dart';
 export 'package:madhya/presentation/matches/view/match_screen.dart';
 export 'package:madhya/presentation/profile/widget/other_profile.dart';
+export 'package:madhya/presentation/mailbox/view/mailbox_screen.dart';
+export 'package:madhya/presentation/mailbox/widget/chat_details.dart';
 
 //Controller//
 export 'package:madhya/presentation/splash/controller/splash_controller.dart';
@@ -57,6 +59,7 @@ export 'package:madhya/presentation/navigation/controller/navigation_controller.
 export 'package:madhya/presentation/home/controller/home_controller.dart';
 export 'package:madhya/presentation/matches/controller/match_controller.dart';
 export 'package:madhya/presentation/profile/controller/other_profile_controller.dart';
+export 'package:madhya/presentation/mailbox/controller/chat_controller.dart';
 
 //Component//
 export 'package:madhya/core/component/onboarding_indicator.dart';

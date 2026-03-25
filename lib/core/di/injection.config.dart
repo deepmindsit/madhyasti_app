@@ -21,6 +21,8 @@ import 'package:madhya/presentation/auth/controller/register_controller.dart'
     as _i335;
 import 'package:madhya/presentation/home/controller/home_controller.dart'
     as _i109;
+import 'package:madhya/presentation/mailbox/controller/chat_controller.dart'
+    as _i212;
 import 'package:madhya/presentation/matches/controller/match_controller.dart'
     as _i742;
 import 'package:madhya/presentation/navigation/controller/navigation_controller.dart'
@@ -44,6 +46,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i335.RegisterController(),
     );
     gh.lazySingleton<_i109.HomeController>(() => _i109.HomeController());
+    gh.lazySingleton<_i212.ChatController>(() => _i212.ChatController());
     gh.lazySingleton<_i742.MatchController>(() => _i742.MatchController());
     gh.lazySingleton<_i272.NavigationController>(
       () => _i272.NavigationController(),

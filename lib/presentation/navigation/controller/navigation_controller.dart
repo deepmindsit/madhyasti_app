@@ -1,5 +1,7 @@
 import 'package:madhya/core/exporters/app_export.dart';
 
+import '../../profile/view/profile_screen.dart';
+
 @lazySingleton
 class NavigationController extends GetxController {
   final currentIndex = 0.obs;
@@ -7,8 +9,8 @@ class NavigationController extends GetxController {
   static final List<Widget> widgetOptions = <Widget>[
     const HomeScreen(),
     const MatchScreen(),
-    const Center(child: Text('Mailbox')),
-    const Center(child: Text('Profile')),
+    const MailboxScreen(),
+    const ProfileScreen(),
   ];
 
   void updateIndex(int index) {
