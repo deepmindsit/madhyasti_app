@@ -205,8 +205,6 @@ class _OtherProfileState extends State<OtherProfile> {
     );
   }
 
-
-
   /// 🔥 BOTTOM MENU
   Widget _buildBottomMenu() {
     return Positioned(

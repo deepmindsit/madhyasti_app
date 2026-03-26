@@ -27,8 +27,16 @@ import 'package:madhya/presentation/matches/controller/match_controller.dart'
     as _i742;
 import 'package:madhya/presentation/navigation/controller/navigation_controller.dart'
     as _i272;
-import 'package:madhya/presentation/profile/controller/other_profile_controller.dart'
-    as _i363;
+import 'package:madhya/presentation/others_profile/controller/other_profile_controller.dart'
+    as _i1019;
+import 'package:madhya/presentation/profile/controller/interest_controller.dart'
+    as _i598;
+import 'package:madhya/presentation/profile/controller/profile_controller.dart'
+    as _i951;
+import 'package:madhya/presentation/profile/controller/shortlist_controller.dart'
+    as _i148;
+import 'package:madhya/presentation/profile/controller/viewed_controller.dart'
+    as _i977;
 import 'package:madhya/presentation/splash/controller/splash_controller.dart'
     as _i572;
 
@@ -51,9 +59,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i272.NavigationController>(
       () => _i272.NavigationController(),
     );
-    gh.lazySingleton<_i363.OtherProfileController>(
-      () => _i363.OtherProfileController(),
+    gh.lazySingleton<_i1019.OtherProfileController>(
+      () => _i1019.OtherProfileController(),
     );
+    gh.lazySingleton<_i598.InterestController>(
+      () => _i598.InterestController(),
+    );
+    gh.lazySingleton<_i951.ProfileController>(() => _i951.ProfileController());
+    gh.lazySingleton<_i148.ShortlistController>(
+      () => _i148.ShortlistController(),
+    );
+    gh.lazySingleton<_i977.ViewedController>(() => _i977.ViewedController());
     gh.lazySingleton<_i572.SplashController>(() => _i572.SplashController());
     return this;
   }

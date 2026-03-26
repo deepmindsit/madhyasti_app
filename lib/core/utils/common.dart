@@ -122,24 +122,45 @@ Widget buildHeadingWithButton({
 
 Widget badge(String text, Color color, dynamic icon) {
   return Container(
-    padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h),
+    padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
     decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(20.r),
+      color: color.withValues(alpha: 0.1),
+      borderRadius: BorderRadius.circular(12.r),
     ),
     child: Row(
-      spacing: 4.w,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        HugeIcon(icon: icon, size: 12.r, color: color),
+        HugeIcon(icon: icon, size: 12.sp, color: color),
+        SizedBox(width: 4.w),
         AppText(
           text: text,
-          fontSize: 9.sp,
-          color: color,
+          fontSize: 10.sp,
           fontWeight: FontWeight.w500,
+          color: color,
         ),
       ],
     ),
   );
+
+  //   Container(
+  //   padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h),
+  //   decoration: BoxDecoration(
+  //     color: Colors.white,
+  //     borderRadius: BorderRadius.circular(20.r),
+  //   ),
+  //   child: Row(
+  //     spacing: 4.w,
+  //     children: [
+  //       HugeIcon(icon: icon, size: 12.r, color: color),
+  //       AppText(
+  //         text: text,
+  //         fontSize: 9.sp,
+  //         color: color,
+  //         fontWeight: FontWeight.w500,
+  //       ),
+  //     ],
+  //   ),
+  // );
 }
 
 Widget headlineWithIcon(String title, dynamic icon) {
@@ -200,5 +221,23 @@ Widget buildDetailItem({required String label, required String value}) {
         ],
       ),
     ),
+  );
+}
+
+Widget buildSection(dynamic child) {
+  return Container(
+    padding: EdgeInsets.all(16.w),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(20.r),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withValues(alpha: 0.04),
+          blurRadius: 8,
+          offset: const Offset(0, 2),
+        ),
+      ],
+    ),
+    child: child,
   );
 }

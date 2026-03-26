@@ -1,4 +1,5 @@
-import 'package:madhya/presentation/mailbox/widget/chat_user_profile.dart';
+
+
 import '../../exporters/app_export.dart';
 
 class AppPages {
@@ -13,5 +14,9 @@ class AppPages {
     GetPage(name: Routes.othersProfile, page: () => OtherProfile()),
     GetPage(name: Routes.chatDetails, page: () => ChatDetails()),
     GetPage(name: Routes.chatProfileDetails, page: () => ChatUserProfile()),
+    GetPage(name: Routes.shortList, page: () => Shortlist()),
+    GetPage(name: Routes.viewed, page: () => Viewed()),
+    GetPage(name: Routes.interest, page: () => Interest()),
+    GetPage(name: Routes.editProfile, page: () => EditProfile()),
   ];
 }

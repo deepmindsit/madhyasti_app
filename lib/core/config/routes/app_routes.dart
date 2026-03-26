@@ -11,4 +11,8 @@ class Routes {
   static const String othersProfile = "/othersProfile";
   static const String chatDetails = "/chatDetails";
   static const String chatProfileDetails = "/chatProfileDetails";
+  static const String shortList = "/shortList";
+  static const String viewed = "/viewed";
+  static const String interest = "/interest";
+  static const String editProfile = "/editProfile";
 }

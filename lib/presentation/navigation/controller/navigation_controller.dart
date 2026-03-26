@@ -10,7 +10,7 @@ class NavigationController extends GetxController {
     const HomeScreen(),
     const MatchScreen(),
     const MailboxScreen(),
-    const ProfileScreen(),
+    ProfileScreen(),
   ];
 
   void updateIndex(int index) {
