@@ -10,6 +10,7 @@ class AppDropdownSearch<T> extends StatelessWidget {
   final String searchHintText;
   final double dropdownHeight;
   final bool showSearchBox;
+  final bool showTitle;
   final ValueChanged<T?> onChanged;
   final String? Function(T?)? validator;
   final String Function(T)? itemAsString;
@@ -25,6 +26,7 @@ class AppDropdownSearch<T> extends StatelessWidget {
     required this.searchHintText,
     this.dropdownHeight = 300,
     this.showSearchBox = true,
+    this.showTitle = true,
     this.validator,
     this.itemAsString,
   });
@@ -38,10 +40,7 @@ class AppDropdownSearch<T> extends StatelessWidget {
         /// Title
         Row(
           children: [
-            Text(
-              title,
-              style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500),
-            ),
+            Text(title, style: AppTextStyles.labelMedium),
             if (isRequired)
               Text(
                 " *",
@@ -56,7 +55,6 @@ class AppDropdownSearch<T> extends StatelessWidget {
           selectedItem: value,
           compareFn: (a, b) => a == b,
           validator: validator,
-
           decoratorProps: DropDownDecoratorProps(
             decoration: InputDecoration(
               hintText: hintText,

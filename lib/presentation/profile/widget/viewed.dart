@@ -43,13 +43,13 @@ class Viewed extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _toggleItem(
+            toggleItem(
               title: 'Who viewed me',
               isSelected: controller.selectedType.value == 0,
               onTap: () => controller.selectedType.value = 0,
             ),
             SizedBox(width: 8.w),
-            _toggleItem(
+            toggleItem(
               title: 'Viewed by me',
               isSelected: controller.selectedType.value == 1,
               onTap: () => controller.selectedType.value = 1,
@@ -60,45 +60,7 @@ class Viewed extends StatelessWidget {
     );
   }
 
-  Widget _toggleItem({
-    required String title,
-    required bool isSelected,
-    required VoidCallback onTap,
-  }) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: onTap,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 250),
-          padding: EdgeInsets.symmetric(vertical: 10.h),
-          decoration: BoxDecoration(
-            color: isSelected ? Colors.white : AppColors.grey100,
-            borderRadius: BorderRadius.circular(10.r),
-            boxShadow: isSelected
-                ? [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.05),
-                      blurRadius: 6,
-                      offset: const Offset(0, 2),
-                    ),
-                  ]
-                : [],
-          ),
-          child: Center(
-            child: AnimatedDefaultTextStyle(
-              duration: const Duration(milliseconds: 250),
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-                color: isSelected ? AppColors.lightPrimary : Colors.grey,
-              ),
-              child: Text(title, textAlign: TextAlign.center),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+
 
   // ---------------- GRID ----------------
 

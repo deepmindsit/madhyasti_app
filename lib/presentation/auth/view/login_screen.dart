@@ -1,14 +1,7 @@
 import 'package:madhya/core/exporters/app_export.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends GetView<LoginController> {
   const LoginScreen({super.key});
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  final controller = getIt<LoginController>();
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 theme,
               ),
               const SizedBox(height: 22),
-              _buildTextField(theme),
+              _buildNumberField(theme),
               const SizedBox(height: 22),
               _buildContinueButton(),
               AppButton(
@@ -67,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildTextField(ThemeData theme) {
+  Widget _buildNumberField(ThemeData theme) {
     return Row(
       spacing: 12,
       children: [

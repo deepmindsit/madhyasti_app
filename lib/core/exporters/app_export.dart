@@ -1,5 +1,6 @@
 //System//
 export 'dart:async';
+export 'dart:convert';
 export 'package:flutter/material.dart';
 export 'package:flutter/services.dart';
 export 'package:flutter/gestures.dart';
@@ -11,7 +12,7 @@ export 'package:madhya/core/theme/app_colors.dart';
 export 'package:madhya/core/theme/text_styles.dart';
 
 //Plugins//
-export 'package:get/get.dart';
+export 'package:get/get.dart' hide Response, FormData, MultipartFile;
 export 'package:injectable/injectable.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:ui_package/ui_package.dart'
@@ -22,6 +23,8 @@ export 'package:sms_autofill/sms_autofill.dart' hide Orientation;
 export 'package:hugeicons/hugeicons.dart';
 export 'package:cached_network_image/cached_network_image.dart';
 export 'package:carousel_slider/carousel_slider.dart';
+export 'package:dotted_border/dotted_border.dart';
+export 'package:dio/dio.dart';
 
 //Common//
 export 'package:madhya/core/constants/app_constants.dart';
@@ -66,9 +69,11 @@ export 'package:madhya/presentation/matches/controller/match_controller.dart';
 export 'package:madhya/presentation/others_profile/controller/other_profile_controller.dart';
 export 'package:madhya/presentation/mailbox/controller/chat_controller.dart';
 export 'package:madhya/presentation/profile/controller/profile_controller.dart';
-export 'package:madhya/presentation/profile/controller/shortlist_controller.dart';
-export 'package:madhya/presentation/profile/controller/viewed_controller.dart';
-export 'package:madhya/presentation/profile/controller/interest_controller.dart';
+export 'package:madhya/presentation/others_profile/controller/shortlist_controller.dart';
+export 'package:madhya/presentation/others_profile/controller/viewed_controller.dart';
+export 'package:madhya/presentation/others_profile/controller/interest_controller.dart';
+export 'package:madhya/presentation/profile/controller/manage_photos_controller.dart';
+export 'package:madhya/presentation/global_search/controller/global_search_controller.dart';
 
 //Component//
 export 'package:madhya/core/component/onboarding_indicator.dart';
@@ -84,3 +89,16 @@ export 'package:madhya/presentation/others_profile/widget/interested_bottomsheet
 export 'package:madhya/presentation/others_profile/widget/shortlist_bottomsheet.dart';
 export 'package:madhya/core/component/app_toggle.dart';
 export 'package:madhya/presentation/profile/widget/interest_card.dart';
+export 'package:madhya/core/component/custom_appbar.dart';
+
+//Repository//
+export 'package:madhya/domain/repository/login_repository.dart';
+
+//Entity//
+export 'package:madhya/domain/entity/login_request.dart';
+
+//Repository Implementation//
+export 'package:madhya/data/repository_impl/auth_repository_impl.dart';
+
+//Use case//
+export 'package:madhya/domain/usecase/login_usecase.dart';

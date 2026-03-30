@@ -1,3 +1,5 @@
+import 'package:madhya/core/constants/init_service.dart';
+
 import 'core/exporters/app_export.dart';
 
 void main() {
@@ -6,11 +8,8 @@ void main() {
       WidgetsFlutterBinding.ensureInitialized();
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
-      /// Load ENV
-      // await _loadEnvironment();
-
       /// Init Dependencies (GetX)
-      // initServices();
+      await initServices();
       await configureDependencies();
 
       /// Global Flutter Error
@@ -24,6 +23,10 @@ void main() {
       AppLogger.fatal('Unhandled Error', error, stack);
     },
   );
+}
+
+Future<void> initServices() async {
+  await Get.putAsync(() => InitService().init());
 }
 
 class MyApp extends StatelessWidget {
@@ -40,8 +43,8 @@ class MyApp extends StatelessWidget {
         /// Routing & bindings
         // initialBinding: InitialBindings(),
         getPages: AppPages.routes,
-        // initialRoute: Routes.splash,
-        initialRoute: Routes.mainScreen,
+        initialRoute: Routes.splash,
+        // initialRoute: Routes.mainScreen,
 
         /// Theme configuration
         theme: AppTheme.lightTheme,

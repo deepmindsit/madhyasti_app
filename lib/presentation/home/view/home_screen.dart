@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
       title: Image.asset(AppAssets.appLogoHorizontal, width: 0.4.sw),
       actions: [
         GestureDetector(
-          // onTap: () => Get.toNamed(Routes.newsListBySearch),
+          onTap: () => Get.toNamed(Routes.searchScreen),
           child: Container(
             padding: EdgeInsets.all(8.w),
             margin: EdgeInsets.all(8.w),

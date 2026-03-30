@@ -193,14 +193,22 @@ Widget headlineWithIcon(String title, dynamic icon) {
   );
 }
 
-Widget buildDetailItem({required String label, required String value}) {
+Widget buildDetailItem({
+  required String label,
+  required String value,
+  bool isFill = true,
+}) {
   return Expanded(
     child: Container(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
       margin: EdgeInsets.symmetric(vertical: 8.h),
       decoration: BoxDecoration(
-        color: AppColors.grey100,
+        color: isFill ? AppColors.grey100 : Colors.transparent,
         borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(
+          color: !isFill ? AppColors.grey300 : Colors.transparent,
+          width: 0.5.w,
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -224,7 +232,13 @@ Widget buildDetailItem({required String label, required String value}) {
   );
 }
 
-Widget buildSection(dynamic child) {
+Widget buildSection(
+  dynamic child,
+  String title,
+  dynamic icon,
+  dynamic onTap, {
+  bool showEdit = true,
+}) {
   return Container(
     padding: EdgeInsets.all(16.w),
     decoration: BoxDecoration(
@@ -238,6 +252,84 @@ Widget buildSection(dynamic child) {
         ),
       ],
     ),
-    child: child,
+    child: Column(
+      children: [
+        Row(
+          children: [
+            Container(
+              padding: EdgeInsets.all(8.w),
+              decoration: BoxDecoration(
+                color: AppColors.lightPrimary.withValues(alpha: 0.05),
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              child: HugeIcon(
+                icon: icon,
+                color: AppColors.lightPrimary,
+                size: 20.r,
+              ),
+            ),
+            SizedBox(width: 12.w),
+            Expanded(
+              child: AppText(
+                text: title,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            if (showEdit)
+              GestureDetector(
+                onTap: onTap,
+                child: HugeIcon(
+                  icon: HugeIcons.strokeRoundedEdit02,
+                  size: 20.r,
+                  color: AppColors.lightTextMidColor,
+                ),
+              ),
+          ],
+        ),
+        child,
+      ],
+    ),
+  );
+}
+
+
+Widget toggleItem({
+  required String title,
+  required bool isSelected,
+  required VoidCallback onTap,
+}) {
+  return Expanded(
+    child: GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 250),
+        padding: EdgeInsets.symmetric(vertical: 10.h),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.white : AppColors.grey100,
+          borderRadius: BorderRadius.circular(10.r),
+          boxShadow: isSelected
+              ? [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.05),
+              blurRadius: 6,
+              offset: const Offset(0, 2),
+            ),
+          ]
+              : [],
+        ),
+        child: Center(
+          child: AnimatedDefaultTextStyle(
+            duration: const Duration(milliseconds: 250),
+            style: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: isSelected ? AppColors.lightPrimary : Colors.grey,
+            ),
+            child: Text(title, textAlign: TextAlign.center),
+          ),
+        ),
+      ),
+    ),
   );
 }
