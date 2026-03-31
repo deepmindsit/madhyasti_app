@@ -2,10 +2,32 @@ import 'package:madhya/core/exporters/app_export.dart';
 
 @lazySingleton
 class HomeController extends GetxController {
-  final sliderList = [
-    'https://images.pexels.com/photos/1456669/pexels-photo-1456669.jpeg',
-    'https://images.pexels.com/photos/5043313/pexels-photo-5043313.jpeg',
-  ].obs;
+  final HomeUsecase homeUsecase;
+  HomeController(this.homeUsecase);
+  final isLoading = false.obs;
+
+  final sliderList = [].obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    _getHome();
+  }
+
+  Future<void> _getHome() async {
+    try {
+      final userid = await SecureStorageService.read('userId') ?? '';
+      isLoading(true);
+      final res = await homeUsecase.call(UserRequest(userid));
+
+      if (res['common']['status'] == true) {
+        final data = res['data'];
+        sliderList.value = data['slider'];
+      }
+    } finally {
+      isLoading(false);
+    }
+  }
 
   final statsData = [
     {"title": "Viewed\nYou", "value": "20", "icon": HugeIcons.strokeRoundedEye},

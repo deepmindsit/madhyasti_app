@@ -1,14 +1,7 @@
 import 'package:madhya/core/exporters/app_export.dart';
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreen extends GetView<RegisterController> {
   const RegisterScreen({super.key});
-
-  @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
-}
-
-class _RegisterScreenState extends State<RegisterScreen> {
-  final controller = getIt<RegisterController>();
 
   @override
   Widget build(BuildContext context) {
@@ -22,41 +15,45 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: Stack(
         children: [
           Center(child: buildBackgroundImage(theme)),
-          _buildForm(theme),
+          _buildForm(theme, context),
         ],
       ),
     );
   }
 
-  Widget _buildForm(ThemeData theme) {
-    return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
-      child: Form(
-        key: controller.registerKey,
-        child: Column(
-          spacing: 8.h,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: Get.height * 0.05),
-            buildTitle("Join Madhyasthi"),
-            buildSubTitle(
-              "Create your profile and discover\nmeaningful matches.",
-              theme,
+  Widget _buildForm(ThemeData theme, BuildContext context) {
+    return Obx(
+      () => controller.isDataLoading.isTrue
+          ? AppLoader()
+          : SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+              child: Form(
+                key: controller.registerKey,
+                child: Column(
+                  spacing: 8.h,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: Get.height * 0.06),
+                    buildTitle("Join Madhyasthi"),
+                    buildSubTitle(
+                      "Create your profile and discover\nmeaningful matches.",
+                      theme,
+                    ),
+                    _buildNameField(theme),
+                    _buildGender(theme),
+                    _buildDOB(theme, context),
+                    _buildAgeDropdown(),
+                    _buildReligionDropdown(),
+                    _buildCasteDropdown(),
+                    _buildSubCasteDropdown(),
+                    const SizedBox(height: 12),
+                    _buildAcceptTerms(),
+                    const SizedBox(height: 8),
+                    _buildRegisterButton(),
+                  ],
+                ),
+              ),
             ),
-            _buildNameField(theme),
-            _buildGender(theme),
-            _buildDOB(theme),
-            _buildAgeDropdown(),
-            _buildReligionDropdown(),
-            _buildCasteDropdown(),
-            _buildSubCasteDropdown(),
-            const SizedBox(height: 12),
-            _buildAcceptTerms(),
-            const SizedBox(height: 8),
-            _buildRegisterButton(),
-          ],
-        ),
-      ),
     );
   }
 
@@ -123,7 +120,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Widget _buildDOB(ThemeData theme) {
+  Widget _buildDOB(ThemeData theme, BuildContext context) {
     return AppTextField(
       labelStyle: TextStyle(
         fontSize: 14.sp,
@@ -173,59 +170,82 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Widget _buildAgeDropdown() {
-    return AppDropdownSearch<String>(
-      title: "Select Your Age",
-      isRequired: true,
-      value: controller.selectedAge.value,
-      items: controller.ageList,
-      hintText: "Choose Age",
-      showSearchBox: false,
-      searchHintText: "Search Age",
-      onChanged: (val) => controller.selectedAge.value = val,
-      validator: AppValidators.required,
+    return Obx(
+      () => AppDropdownField(
+        isRequired: true,
+        isDynamic: true,
+        title: "Select Your Age",
+        value: controller.selectedAge.value,
+        items: controller.ageList,
+        hintText: 'Select your Age',
+        validator: AppValidators.required,
+        onChanged: (val) => controller.selectedAge.value = val,
+      ),
     );
   }
 
   Widget _buildReligionDropdown() {
-    return AppDropdownSearch<String>(
-      title: "Select Your Religion",
-      isRequired: true,
-      value: controller.selectedReligion.value,
-      items: controller.religionList,
-      hintText: "Choose Religion",
-      showSearchBox: false,
-      searchHintText: "Search Religion",
-      onChanged: (val) => controller.selectedReligion.value = val,
-      validator: AppValidators.required,
+    return Obx(
+      () => AppDropdownField(
+        isRequired: true,
+        isDynamic: true,
+        title: "Select Your Religion",
+        value: controller.selectedReligion.value,
+        items: controller.religionList,
+        hintText: 'Select your Religion',
+        validator: AppValidators.required,
+        onChanged: (val) {
+          controller.selectedReligion.value = val;
+          controller.fetchCaste(val.toString());
+        },
+      ),
     );
   }
 
   Widget _buildCasteDropdown() {
-    return AppDropdownSearch<String>(
-      title: "Select Your Caste",
-      isRequired: true,
-      value: controller.selectedCaste.value,
-      items: controller.casteList,
-      hintText: "Choose Caste",
-      searchHintText: "Search Caste",
-      showSearchBox: false,
-      onChanged: (val) => controller.selectedCaste.value = val,
-      validator: AppValidators.required,
-    );
+    return Obx(() {
+      return AppDropdownField(
+        isRequired: true,
+        isDynamic: true,
+        title: "Select Your Caste",
+        value: controller.selectedCaste.value,
+        items: controller.casteList,
+        hintText: controller.isCasteLoading.value
+            ? "Loading caste..."
+            : "Select your Caste",
+        validator: AppValidators.required,
+        onChanged: controller.isCasteLoading.value
+            ? null
+            : (val) {
+                controller.selectedCaste.value = val;
+                controller.fetchSubCaste(val.toString());
+              },
+      );
+    });
   }
 
   Widget _buildSubCasteDropdown() {
-    return AppDropdownSearch<String>(
-      title: "Select Your Subcaste",
-      isRequired: true,
-      value: controller.selectedSubCaste.value,
-      items: controller.subCasteList,
-      hintText: "Choose Subcaste",
-      searchHintText: "Search Subcaste",
-      showSearchBox: false,
-      onChanged: (val) => controller.selectedSubCaste.value = val,
-      validator: AppValidators.required,
-    );
+    return Obx(() {
+      // if (controller.isSubCasteLoading.value) {
+      //   return const Center(child: CircularProgressIndicator());
+      // }
+
+      return AppDropdownField(
+        isRequired: true,
+        isDynamic: true,
+        title: "Select Your Subcaste",
+        value: controller.selectedSubCaste.value,
+        items: controller.subCasteList,
+        hintText: controller.isSubCasteLoading.value
+            ? "Loading Subcaste..."
+            : "Select your Subcaste",
+        // hintText: 'Select your Subcaste',
+        validator: AppValidators.required,
+        onChanged: controller.isSubCasteLoading.value
+            ? null
+            : (val) => controller.selectedSubCaste.value = val,
+      );
+    });
   }
 
   Widget _buildAcceptTerms() {
@@ -302,16 +322,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Widget _buildRegisterButton() {
-    return AppButton(
-      text: 'Register Free',
-      onTap: _validateAndSubmit,
-      backgroundColor: AppColors.lightPrimary,
-      type: AppButtonType.secondary,
-      textColor: Colors.white,
+    return Obx(
+      () => AppButton(
+        text: 'Continue',
+        onTap: controller.isLoading.value ? null : _validateAndSubmit,
+        backgroundColor: AppColors.lightPrimary,
+        type: AppButtonType.secondary,
+        textColor: Colors.white,
+      ),
     );
   }
 
-  void _validateAndSubmit() {
+  void _validateAndSubmit() async {
     final form = controller.registerKey.currentState;
 
     if (form == null) return;
@@ -334,6 +356,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
 
     /// SUCCESS
-    Get.offAllNamed(Routes.addProfile);
+    Get.toNamed(Routes.addProfile);
   }
 }

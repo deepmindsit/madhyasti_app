@@ -10,13 +10,23 @@ class SplashController extends GetxController {
 
   void checkLogin() async {
     await Future.delayed(const Duration(seconds: 2));
-    Get.offAllNamed(Routes.onboarding);
-    // final token = storage.getToken();
 
-    // if (token != null && token.isNotEmpty) {
-    //   Get.offAllNamed('/home');
-    // } else {
-    //   Get.offAllNamed('/login');
-    // }
+    final isOnboarded =
+        await SecureStorageService.read('isOnboarded') ?? 'false';
+
+    final token = await SecureStorageService.read('token') ?? '';
+
+    /// ✅ 1. First check onboarding
+    if (isOnboarded != 'true') {
+      Get.offAllNamed(Routes.onboarding);
+      return;
+    }
+
+    /// ✅ 2. Then check login
+    if (token.isEmpty) {
+      Get.offAllNamed(Routes.login);
+    } else {
+      Get.offAllNamed(Routes.mainScreen);
+    }
   }
 }

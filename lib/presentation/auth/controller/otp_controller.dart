@@ -1,12 +1,32 @@
 import 'package:madhya/core/exporters/app_export.dart';
 
 @lazySingleton
-class OtpController extends GetxController {
+class OtpController extends GetxController with CodeAutoFill {
+  final VerifyOtpUsecase verifyOtpUsecase;
+  OtpController(this.verifyOtpUsecase);
+
   final otpController = TextEditingController();
   final verifyKey = GlobalKey<FormState>();
-
+  final isLoading = false.obs;
   var start = 30.obs;
   Timer? _timer;
+
+  @override
+  void onInit() {
+    startTimer();
+    listenForCode();
+    SmsAutoFill().getAppSignature.then((value) {});
+    super.onInit();
+  }
+
+  @override
+  void codeUpdated() {
+    if (code != null) {
+      String extractedOtp = extractOtp(code!);
+
+      otpController.text = extractedOtp;
+    }
+  }
 
   void startTimer() {
     start.value = 30;
@@ -31,9 +51,45 @@ class OtpController extends GetxController {
     return exp.firstMatch(sms)?.group(0) ?? "";
   }
 
+  Future<void> verifyOTP(String number) async {
+    if (!verifyKey.currentState!.validate()) return;
+    try {
+      isLoading(true);
+      final response = await verifyOtpUsecase.call(
+        VerifyOtpRequest(phone: number, otp: otpController.text),
+      );
+      if (response['common']['status'] == true) {
+        await SecureStorageService.write('token', response['user']['auth_key']);
+        await SecureStorageService.write(
+          'user_id',
+          response['user']['id'].toString(),
+        );
+
+        Get.snackbar('Success', response['common']['message']);
+
+        if (response['user']['is_user_exist'] == true) {
+          Get.offAllNamed(Routes.mainScreen);
+        } else {
+          Get.offAllNamed(Routes.registerScreen);
+        }
+      } else {
+        Get.snackbar('Failed', response['common']['message']);
+        if (response['data']['is_user_exist'] == false) {
+          Get.toNamed(Routes.registerScreen);
+        }
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    } finally {
+      isLoading(false);
+    }
+  }
+
   @override
   void onClose() {
     _timer?.cancel();
+    SmsAutoFill().unregisterListener();
+    otpController.dispose();
     super.onClose();
   }
 }

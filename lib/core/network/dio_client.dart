@@ -1,27 +1,23 @@
-import 'package:dio/dio.dart';
-import '../constants/api_constants.dart';
-import 'interceptors/auth_interceptor.dart';
+import 'package:madhya/core/exporters/app_export.dart';
 
 class DioClient {
   static Dio create() {
     final dio = Dio(
       BaseOptions(
-        baseUrl: ApiConstants.baseUrl, // 🔥 from .env or dart-define
+        // contentType: 'multipart/form-data',
+        baseUrl: ApiConstants.baseUrl,
+        receiveDataWhenStatusError: true,
         connectTimeout: ApiConstants.connectionTimeout,
         receiveTimeout: ApiConstants.receiveTimeout,
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
       ),
     );
 
-    dio.interceptors.add(
-      LogInterceptor(
-        // requestBody: AuthInterceptor(),
-        responseBody: true,
-      ),
-    );
+    /// 🔥 Order matters
+    dio.interceptors.addAll([
+      AuthInterceptor(), // 1. Add token
+      RetryInterceptor(dio), // 2. Retry failed requests
+      LoggerInterceptor(), // 3. Log everything
+    ]);
 
     return dio;
   }

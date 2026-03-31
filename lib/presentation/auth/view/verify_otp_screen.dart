@@ -1,38 +1,7 @@
 import 'package:madhya/core/exporters/app_export.dart';
 
-class VerifyOTPScreen extends StatefulWidget {
+class VerifyOTPScreen extends GetView<OtpController> {
   const VerifyOTPScreen({super.key});
-
-  @override
-  State<VerifyOTPScreen> createState() => _VerifyOTPScreenState();
-}
-
-class _VerifyOTPScreenState extends State<VerifyOTPScreen> with CodeAutoFill {
-  final controller = getIt<OtpController>();
-
-  @override
-  void initState() {
-    super.initState();
-    controller.startTimer();
-    listenForCode();
-    SmsAutoFill().getAppSignature.then((value) {});
-  }
-
-  /// This method is triggered when SMS is received
-  @override
-  void codeUpdated() {
-    if (code != null) {
-      String extractedOtp = controller.extractOtp(code!);
-
-      controller.otpController.text = extractedOtp;
-    }
-  }
-
-  @override
-  void dispose() {
-    SmsAutoFill().unregisterListener();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +33,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> with CodeAutoFill {
               // Title
               buildTitle("Enter the code send to"),
               buildSubTitle(
-                "We’ve sent a 6-digit OTP on +91 ${getIt<LoginController>().numberController.text.trim()}",
+                "We’ve sent a 6-digit OTP on +91 ${Get.find<LoginController>().numberController.text.trim()}",
                 theme,
               ),
               const SizedBox(height: 10),
@@ -87,12 +56,12 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> with CodeAutoFill {
       height: 50.h,
       textStyle: TextStyle(
         fontSize: 22.sp,
-        color: Theme.of(context).textTheme.bodySmall!.color,
+        color: theme.textTheme.bodySmall!.color,
         fontWeight: FontWeight.w600,
       ),
       decoration: BoxDecoration(
         border: Border.all(color: AppColors.grey300),
-        color: Theme.of(context).scaffoldBackgroundColor,
+        color: theme.scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(10.r),
       ),
     );
@@ -140,7 +109,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> with CodeAutoFill {
                 fontSize: 14.sp,
               )
             : GestureDetector(
-                onTap: () {},
+                onTap: () => Get.find<LoginController>().login(),
                 child: AppText(
                   text: 'Resend OTP',
                   color: AppColors.lightPrimary,
@@ -154,14 +123,15 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> with CodeAutoFill {
 
   /// ---------------- VERIFY BUTTON ----------------
   Widget _buildVerifyButton() {
-    return AppButton(
-      text: 'Verify OTP',
-      onTap: () {
-        if (controller.verifyKey.currentState!.validate()) {
-          Get.offAllNamed(Routes.registerScreen);
-        }
-      },
-      backgroundColor: AppColors.lightPrimary,
+    return Obx(
+      () => AppButton(
+        text: 'Verify OTP',
+        loading: controller.isLoading.value,
+        onTap: () async => await controller.verifyOTP(
+          Get.find<LoginController>().numberController.text,
+        ),
+        backgroundColor: AppColors.lightPrimary,
+      ),
     );
   }
 
@@ -169,7 +139,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> with CodeAutoFill {
   Widget _buildChangeNumber() {
     return GestureDetector(
       onTap: () => AllDialogs().changeNumber(
-        getIt<LoginController>().numberController.text,
+        Get.find<LoginController>().numberController.text,
       ),
       child: Text(
         "Change Mobile Number",

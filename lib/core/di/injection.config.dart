@@ -13,7 +13,7 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:madhya/core/exporters/app_export.dart' as _i571;
-import 'package:madhya/core/network/api_client.dart' as _i678;
+import 'package:madhya/core/network/api_service.dart' as _i466;
 import 'package:madhya/core/network/register_module.dart' as _i571;
 import 'package:madhya/presentation/auth/controller/login_controller.dart'
     as _i539;
@@ -58,14 +58,9 @@ extension GetItInjectableX on _i174.GetIt {
     final registerModule = _$RegisterModule();
     gh.lazySingleton<_i571.Dio>(() => registerModule.dio);
     gh.lazySingleton<_i20.AuthController>(() => _i20.AuthController());
-    gh.lazySingleton<_i593.OtpController>(() => _i593.OtpController());
-    gh.lazySingleton<_i335.RegisterController>(
-      () => _i335.RegisterController(),
-    );
     gh.lazySingleton<_i337.GlobalSearchController>(
       () => _i337.GlobalSearchController(),
     );
-    gh.lazySingleton<_i109.HomeController>(() => _i109.HomeController());
     gh.lazySingleton<_i212.ChatController>(() => _i212.ChatController());
     gh.lazySingleton<_i742.MatchController>(() => _i742.MatchController());
     gh.lazySingleton<_i272.NavigationController>(
@@ -86,10 +81,24 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i951.ProfileController>(() => _i951.ProfileController());
     gh.lazySingleton<_i572.SplashController>(() => _i572.SplashController());
+    gh.lazySingleton<_i109.HomeController>(
+      () => _i109.HomeController(gh<_i571.HomeUsecase>()),
+    );
     gh.lazySingleton<_i539.LoginController>(
       () => _i539.LoginController(gh<_i571.LoginUsecase>()),
     );
-    gh.factory<_i678.ApiService>(() => _i678.ApiService(gh<_i361.Dio>()));
+    gh.factory<_i466.ApiService>(() => _i466.ApiService(gh<_i361.Dio>()));
+    gh.lazySingleton<_i593.OtpController>(
+      () => _i593.OtpController(gh<_i571.VerifyOtpUsecase>()),
+    );
+    gh.lazySingleton<_i335.RegisterController>(
+      () => _i335.RegisterController(
+        gh<_i571.CommonDataUsecase>(),
+        gh<_i571.RegisterUsecase>(),
+        gh<_i571.CasteByRelUsecase>(),
+        gh<_i571.SubCasteByCasteUsecase>(),
+      ),
+    );
     return this;
   }
 }

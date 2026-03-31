@@ -111,10 +111,14 @@ class LoginScreen extends GetView<LoginController> {
 
   ///Login Button///
   Widget _buildContinueButton() {
-    return AppButton(
-      text: 'Continue',
-      onTap: controller.continueLogin,
-      backgroundColor: AppColors.lightPrimary,
+    return Obx(()=>
+       AppButton(
+         size: AppButtonSize.medium,
+        text: 'Continue',
+        loading: controller.isLoading.value,
+        onTap: controller.login,
+        backgroundColor: AppColors.lightPrimary,
+      ),
     );
   }
 }

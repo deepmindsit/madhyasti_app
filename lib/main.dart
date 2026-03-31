@@ -1,4 +1,5 @@
 import 'package:madhya/core/constants/init_service.dart';
+import 'package:madhya/core/network/initial_bindings.dart';
 
 import 'core/exporters/app_export.dart';
 
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
         title: AppConstants.appName,
 
         /// Routing & bindings
-        // initialBinding: InitialBindings(),
+        initialBinding: InitialBindings(),
         getPages: AppPages.routes,
         initialRoute: Routes.splash,
         // initialRoute: Routes.mainScreen,

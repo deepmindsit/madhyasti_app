@@ -1,14 +1,7 @@
 import 'package:madhya/core/exporters/app_export.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends GetView<HomeController> {
   const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final controller = getIt<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return AppCarouselSlider(
       margin: const EdgeInsets.only(bottom: 8),
       activeIndicatorColor: AppColors.lightPrimary,
-      imageUrls: controller.sliderList,
+      imageUrls:List<String>.from(controller.sliderList) ,
       height: Get.height * 0.23,
     );
   }

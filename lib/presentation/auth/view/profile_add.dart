@@ -1,14 +1,7 @@
 import 'package:madhya/core/exporters/app_export.dart';
 
-class ProfileAdd extends StatefulWidget {
+class ProfileAdd extends GetView<RegisterController> {
   const ProfileAdd({super.key});
-
-  @override
-  State<ProfileAdd> createState() => _ProfileAddState();
-}
-
-class _ProfileAddState extends State<ProfileAdd> {
-  final controller = getIt<RegisterController>();
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +38,10 @@ class _ProfileAddState extends State<ProfileAdd> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildContinueButton(),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: _buildContinueButton(),
+      ),
     );
   }
 
@@ -198,20 +194,28 @@ class _ProfileAddState extends State<ProfileAdd> {
   Widget _buildContinueButton() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: AppButton(
-        text: 'Continue',
-        onTap: () {
-          if (controller.profileImages.length < 3) {
-            Get.snackbar(
-              "Minimum Required",
-              "Please upload at least 3 images",
-              backgroundColor: Colors.red,
-              colorText: Colors.white,
-            );
-            return;
-          }
-        },
-        backgroundColor: AppColors.lightPrimary,
+      child: Obx(()=>
+        AppButton(
+          text: controller.isLoading.value ? 'Please wait...' : 'Register Free',
+          onTap: controller.isLoading.value
+              ? null
+              : () async {
+                  if (controller.profileImages.length < 3) {
+                    Get.snackbar(
+                      "Minimum Required",
+                      "Please upload at least 3 images",
+                      backgroundColor: Colors.red,
+                      colorText: Colors.white,
+                    );
+                    return;
+                  }
+                  await controller.registerUser(
+                    Get.find<LoginController>().numberController.text,
+                  );
+                },
+
+          backgroundColor: AppColors.lightPrimary,
+        ),
       ),
     );
   }

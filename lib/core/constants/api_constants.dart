@@ -34,8 +34,10 @@ class ApiConstants {
 
   /// API endpoints
   static const String login = '/login';
-  static const String register = '/auth/register';
-  static const String refreshToken = '/auth/refresh';
-  static const String logout = '/auth/logout';
-  static const String userProfile = '/user/profile';
+  static const String verifyOTP = '/verify-otp';
+  static const String getCommonData = '/get-common-data';
+  static const String getCasteByReligion = '/get-caste-by-religion';
+  static const String getSubCasteByCaste = '/get-sub-caste-by-caste';
+  static const String register = '/register';
+  static const String home = '/home';
 }

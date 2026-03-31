@@ -1,5 +1,8 @@
-import 'package:madhya/presentation/auth/binding/auth_bindings.dart';
+import 'package:madhya/presentation/auth/binding/login_bindings.dart';
+import 'package:madhya/presentation/auth/binding/otp_binding.dart';
+import 'package:madhya/presentation/auth/binding/register_bindings.dart';
 import 'package:madhya/presentation/global_search/view/global_search.dart';
+import 'package:madhya/presentation/home/bindings/home_bindings.dart';
 import 'package:madhya/presentation/profile/widget/edit_profile_content/about_me_edit.dart';
 import 'package:madhya/presentation/profile/widget/edit_profile_content/basic_details_edit.dart';
 import 'package:madhya/presentation/profile/widget/edit_profile_content/family_details_edit.dart';
@@ -24,10 +27,14 @@ class AppPages {
       page: () => LoginScreen(),
       binding: LoginBinding(),
     ),
-    GetPage(name: Routes.verifyOTP, page: () => VerifyOTPScreen()),
-    GetPage(name: Routes.registerScreen, page: () => RegisterScreen()),
+    GetPage(
+      name: Routes.verifyOTP,
+      page: () => VerifyOTPScreen(),
+      binding: OtpBinding(),
+    ),
+    GetPage(name: Routes.registerScreen, page: () => RegisterScreen(),binding: RegisterBindings()),
     GetPage(name: Routes.addProfile, page: () => ProfileAdd()),
-    GetPage(name: Routes.mainScreen, page: () => NavigationScreen()),
+    GetPage(name: Routes.mainScreen, page: () => NavigationScreen(),binding: HomeBindings()),
     GetPage(name: Routes.searchScreen, page: () => GlobalSearch()),
     GetPage(name: Routes.othersProfile, page: () => OtherProfile()),
     GetPage(name: Routes.chatDetails, page: () => ChatDetails()),

@@ -3,6 +3,7 @@ import 'package:madhya/core/exporters/app_export.dart';
 @lazySingleton
 class LoginController extends GetxController {
   final LoginUsecase usecase;
+
   LoginController(this.usecase);
 
   final numberController = TextEditingController();
@@ -19,21 +20,14 @@ class LoginController extends GetxController {
       final response = await usecase(
         LoginRequest(numberController.text.trim()),
       );
-      final res = json.decode(response.body);
 
-      if (res['common']['status'] == true) {
-        Get.offAllNamed(Routes.mainScreen);
+      if (response['common']['status'] == true) {
+        Get.snackbar('Success', response['common']['message']);
+        Get.toNamed(Routes.verifyOTP);
       }
-    } catch (e) {
-      Get.snackbar('Error', e.toString());
+    } catch (_) {
     } finally {
       isLoading.value = false;
     }
-  }
-
-  void continueLogin() {
-    if (!loginKey.currentState!.validate()) return;
-
-    Get.offAllNamed(Routes.mainScreen);
   }
 }
